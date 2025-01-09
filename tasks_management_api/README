@@ -1,0 +1,70 @@
+# Task Management API
+
+## Project Overview
+The Task Management API is built using Django and Django REST Framework (DRF) to help users manage their tasks effectively. The API supports CRUD operations for tasks and users, authentication, and task filtering. It allows users to mark tasks as complete or incomplete, and manage task priority and due dates. The application is deployed on [Heroku/PythonAnywhere].
+
+## Features
+- CRUD operations for tasks (Create, Read, Update, Delete)
+- Task attributes: Title, Description, Due Date, Priority Level, Status
+- User management (CRUD) with authentication
+- Mark tasks as complete or incomplete with a timestamp
+- Filters and sorting for tasks (by Status, Priority, Due Date)
+- Only authorized users can access their tasks (no access to other users' tasks)
+### Prerequisites
+- Python 3.x
+- Django
+- Django REST Framework
+- PostgreSQL (or your preferred database)
+
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/task-management-api.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd task-management-api
+   ```
+3. Create a virtual environment and activate it:
+   ```bash
+   python -m venv env
+   source env/bin/activate  # On Windows, use `env\Scripts\activate`
+   ```
+4. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+5. Set up the database and run migrations:
+   ```bash
+   python manage.py migrate
+   ```
+6. Run the server:
+   ```bash
+   python manage.py runserver
+   ```
+### Authentication
+- POST `/api/login/` - Log in a user (returns JWT token)
+- POST `/api/register/` - Register a new user
+
+### Task Management
+- GET `/api/tasks/` - List all tasks (with optional filters for Status, Priority, Due Date)
+- POST `/api/tasks/` - Create a new task
+- GET `/api/tasks/{id}/` - Retrieve a task by ID
+- PUT `/api/tasks/{id}/` - Update a task by ID
+- DELETE `/api/tasks/{id}/` - Delete a task by ID
+- PATCH `/api/tasks/{id}/complete/` - Mark a task as complete/incomplete
+
+
+Users can filter tasks by:
+- `Status`: Pending or Completed
+- `Priority`: Low, Medium, High
+- `Due Date`
+
+Tasks can be sorted by:
+- `Due Date`: Ascending or Descending
+- `Priority Level`: Low, Medium, High
+- The API is built using Django and Django REST Framework (DRF).
+- User authentication is handled using Django's built-in authentication system.
+- The database is managed using Django ORM.
+- JWT authentication is used for secure API access (optional).
+- Tasks are only accessible to the users who created them through permission checks.
