@@ -1,0 +1,12 @@
+<!-- tasks/templates/tasks/task_form.html -->
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<h2>Create Task</h2>
+<form method="post">
+    {% csrf_token %}  <!-- CSRF token is required for security -->
+    {{ form.as_p }}   <!-- Render the form fields -->
+    <button type="submit" class="btn btn-success">Save</button>
+    <a href="{% url 'task-list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

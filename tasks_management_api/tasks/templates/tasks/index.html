@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .task {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .task h3 {
+            margin: 0;
+        }
+        .task p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task Management</h1>
+    <div id="tasks">
+        <!-- سيتم ملء هذا القسم بالبيانات من API -->
+        <p>Loading tasks...</p>
+    </div>
+
+    <script>
+        // جلب البيانات من API وعرضها
+        fetch('/api/tasks/')
+            .then(response => response.json())
+            .then(data => {
+                const tasksContainer = document.getElementById('tasks');
+                tasksContainer.innerHTML = '';  // مسح محتوى التحميل
+
+                data.forEach(task => {
+                    const taskElement = document.createElement('div');
+                    taskElement.className = 'task';
+                    taskElement.innerHTML = `
+                        <h3>${task.title}</h3>
+                        <p>${task.description}</p>
+                        <p><strong>Due Date:</strong> ${task.due_date}</p>
+                        <p><strong>Priority:</strong> ${task.priority}</p>
+                        <p><strong>Status:</strong> ${task.status}</p>
+                    `;
+                    tasksContainer.appendChild(taskElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching tasks:', error);
+                document.getElementById('tasks').innerHTML = '<p>Failed to load tasks.</p>';
+            });
+    </script>
+</body>
+</html>

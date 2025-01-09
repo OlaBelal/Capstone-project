@@ -1,0 +1,9 @@
+<!-- tasks/templates/tasks/home.html -->
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<h1>Welcome to the Task Management API!</h1>
+<p>Manage your tasks efficiently with our platform.</p>
+<a href="{% url 'task-list' %}" class="btn btn-primary">View Tasks</a>
+<a href="{% url 'task-create' %}" class="btn btn-success">Create New Task</a>
+{% endblock %}
